@@ -1,24 +1,31 @@
-class Calculator{
-
+module.exports = class Calculator{
     
     add(){
         var summed = 0 ;
         for(var i = 0;i<arguments.length;i++){
-            summed += arguments[i];
-        }return summed;
+           if (arguments[i] == "LAST") {
+                summed += this.last_value;               
+           }else{
+               summed += arguments[i];
+           }
+
+        }
+        this.last_value = summed;
+        return summed;
     }
 
     multiply(){
         var product = 1 ;
         for(var i = 0;i<arguments.length;i++){
             product *= arguments[i];
-        }return product;
-    } 
+        }
+        this.last_value = product;
+        return product;
+    }
+    
+    last(){
+        return  this.last_value;
+    }
 
 }
  
-let calculator_instance = new Calculator;
-
-console.log(calculator_instance.add(3,5));
-console.log(calculator_instance.add(3,5,2));
-console.log(calculator_instance.multiply(30,2));
