@@ -17,8 +17,13 @@ module.exports = class Calculator{
     multiply(){
         var product = 1 ;
         for(var i = 0;i<arguments.length;i++){
-            product *= arguments[i];
-        }
+            if (arguments[i] == "LAST") {
+                 product *= this.last_value;               
+            }else{
+                product *= arguments[i];
+            }
+ 
+         }
         this.last_value = product;
         return product;
     }
