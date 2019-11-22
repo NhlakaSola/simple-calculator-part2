@@ -21,3 +21,6 @@ describe("string calculator to multiply numbers", function () {
 
 console.log(calculator.add(2,3));
 console.log(calculator.add("LAST",3));
+calculator.set_slot(1);
+console.log(calculator.get_slot(1));
+console.log(calculator.add("SLOT_1",2));
