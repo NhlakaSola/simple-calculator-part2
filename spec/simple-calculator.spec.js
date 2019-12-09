@@ -17,17 +17,13 @@ describe("simple calculator", function () {
         expect(calculator.multiply(1,2,3,4)).toEqual(24);
     });
 
-    it("should be able to remember the last value", function () {
-        expect(calculator.add("LAST",2)).toEqual();
-    });  
-
-    it("should be able to use last in other functions", function () {
-        expect(calculator.multiply("LAST",2)).toEqual();
-    });  
     
+
 
 });
 
 
 console.log(calculator.add(2,3));
 console.log(calculator.add("LAST",3));
+calculator.set_slot(1);
+console.log(calculator.get_slot(1));

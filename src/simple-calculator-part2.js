@@ -2,65 +2,58 @@
 module.exports = class Calculator{
 
     constructor () {
-        this.slot = [];
-
+        this.slots_array = [];
+        this.last_value = 0;
     }
     
     add(){
-        
-        var summed = 0 ;
-        for(var i = 0;i<arguments.length;i++){
-           if (arguments[i] == "LAST") {
-                summed += this.last_value;               
-           }else if (arguments[i] == "SLOT_") {
-            console.log(arguments[i]);
-            let b = parseInt(arguments[arguments.length-1]);
-            summed += this.get_slot[b];
-            
-        }else{
-               summed += arguments[i];
-           }
-
-        }
-        this.last_value = summed;
-       
-        return summed;
-    }
+		var summed = 0 ;
+		for(var i = 0;i<arguments.length;i++){
+			if (typeof arguments[i] == 'string') {
+				if (arguments[i] == "LAST") {
+					summed += this.last_value;
+				}else{
+					let str = /\d/g;
+					let numberOfSlot = str.exec(arguments[i]);
+					summed += this.slots_array[parseInt(numberOfSlot[0]) - 1];
+				}
+			}else{
+				summed += arguments[i];
+			}
+		}
+		this.last_value = summed;
+		return summed;
+	}
 
     multiply(){
-        var product = 1 ;
-        for(var i = 0;i<arguments.length;i++){
-            if (arguments[i]== "LAST") {
-                 product *= this.last_value;               
-            }else if (arguments[i] == "SLOT_") {
-                console.log(arguments[i]);
-                let b = parseInt(arguments[arguments.length-1]);
-                product *= this.get_slot[b];
-                
-            }else{
-                product *= arguments[i];
-            }
- 
-         }
-        this.last_value = product;
-        
-        return product;
-    }
+		var product = 1 ;
+		for (let i = 0; i < arguments.length; i++) {
+			if (typeof arguments[i] == 'string') {
+				if (arguments[i] == "LAST") {
+					product *= this.last_value;
+				}else {
+					let str = /\d/g;
+					let numberOfSlot = str.exec(arguments[i]);
+					product *= this.slots_array[parseInt(numberOfSlot[0]) - 1];
+				}
+			}else {
+				product *= arguments[i];		
+			}
+		}
+		this.last_value = product;
+		return product;
+	}
     
     last(){
-
-        this.slot.push(this.last_value);
-        return  this.last_value;
-        
+        return this.last_value;
     }
 
     set_slot(slot_number){
-        this.slot[slot_number - 1]; 
-        
+        this.slots_array.push(this.last_value);
     }
 
     get_slot(slot_number){
-        return this.slot[slot_number-1];
+        return this.slots_array[slot_number-1];
     }
 
 }
