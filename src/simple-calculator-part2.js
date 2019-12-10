@@ -1,20 +1,20 @@
 module.exports = class Calculator{
-
     constructor () {
         this.slots_array = [];
         this.last_value = 0;
     }
     
     add(){
-		var summed = 0 ;
+		let summed = 0 ;
 		for(var i = 0;i<arguments.length;i++){
 			if (typeof arguments[i] == 'string') {
 				if (arguments[i] == "LAST") {
-					summed += this.last_value;
+					summed += this.last();
 				}else{
 					let str = /\d/g;
 					let numberOfSlot = str.exec(arguments[i]);
-					summed += this.slots_array[parseInt(numberOfSlot[0]) - 1];
+		
+					summed += this.get_slot(parseInt(numberOfSlot[0]));
 				}
 			}else{
 				summed += arguments[i];
@@ -25,15 +25,15 @@ module.exports = class Calculator{
 	}
 
     multiply(){
-		var product = 1 ;
+		let product = 1 ;
 		for (let i = 0; i < arguments.length; i++) {
 			if (typeof arguments[i] == 'string') {
 				if (arguments[i] == "LAST") {
-					product *= this.last_value;
+					product *= this.last();
 				}else {
 					let str = /\d/g;
 					let numberOfSlot = str.exec(arguments[i]);
-					product *= this.slots_array[parseInt(numberOfSlot[0]) - 1];
+					product *= this.get_slot(parseInt(numberOfSlot[0]));
 				}
 			}else {
 				product *= arguments[i];		
